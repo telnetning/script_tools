@@ -1,7 +1,6 @@
 get_lyrics
 ==========
 
-get lyric text from http://www.xiami.com/ or  http://music.163.com/
 這是一個簡單的腳本，用來下載歌詞  
 
 * 主要用於命令行，默認輸出到終端，可以任意重定向。  
