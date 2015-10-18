@@ -15,3 +15,27 @@ get_lyrics
 getScores.py
 ===========
 用來批量查看某一門課程的所有同學的成績
+
+youdao.py  
+========
+用来在命令行使用有道网站查询单词。  
+使用前安装python的requests以及lxml模块。  
+
+```sh
+pip install requests  
+pip install lxml
+```
+
+使用方法:  
+
+```sh
+./youdao.py word
+```
+
+可以将其放到系统bin目录下以及使用alias简化使用。  
+
+```sh
+cp youdao.py /usr/bin
+chmod +x /usr/bin/youdao.py
+alias yd='youdao.py'
+```
