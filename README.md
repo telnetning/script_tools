@@ -45,3 +45,50 @@ Add.py
 把url添加到pocket（一个read it later应用）
 
 
+down\_android\_sourcer.sh  
+==========
+这个是我在按照官方文档下载Android源码的时候，由于某些并不太清楚的原因，下载过程会由于错误退出或者是类似于卡死的节奏，因此写了一个脚本，用来实现下面的功能  
+*  每隔一分钟运行该脚本一次  
+*  检查下载程序是否在运行，如果没有在运行，则运行  
+*  如果下载程序正在运行，判断是否已经超过30分钟，如果是，判定为卡死，重新启动该下载程序   
+
+脚本运行间隔时间和下载工作目录可以自定义。
+
+extend\_vagrant\_commang.sh
+======
+这个是对vagrant命令的一点补充。  
+由于vagrant的某些命令不具有全局性，常用的以下几个：  
+
++ vagrant ssh 
++ vagrang halt
++ vagrant suspend
++ vagrant up 
++ vagrant status
+
+它们后面的参数一般是实例的name或者id，然而当是name的时候，这些命令不具有全局性了（这是因为name可能不唯一）。但是实际使用的时候，name常常会是不同的，这个时候vagrant的以上命令不能全局会导致不方便。  
+所以有了这个小脚本，脚本只是对vagrant命令的一个补充，当以上的命令后面接的是实例的name的时候，我们的脚本会尝试对脚本的name（正确且唯一方可）进行解析，然后转换成id后进行命令执行。  
+使用的时候将脚本里面的内容copy到`.bash_profile`中去，放入一个函数，并将vagrant命令指向这个函数即可。  
+就像这样：  
+
+
+```sh
+alias vagrant=alias_vagrant
+
+alias_vagrant () {
+if [ $# -ne 2 ] || ([ $1 != "up" ] && [ $1 != "status" ] && [ $1 != "suspend" ] && [ $1 != "halt" ] && [ $1 !=  "ssh" ])
+then
+   for i in $@
+       do
+           /usr/bin/vagrant $*
+   done
+else
+    id=`/usr/bin/vagrant global-status | grep $2 | awk '{print $1}'`
+    if [ ${#id} -ne 7 ]
+    then
+        echo "请检查输入的name值是否正确且唯一"
+    else
+        /usr/bin/vagrant $1 $id
+    fi
+fi
+}
+```
