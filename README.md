@@ -1,4 +1,4 @@
-get_lyrics
+Iget_lyrics
 ==========
 
 這是一個簡單的腳本，用來下載歌詞  
@@ -39,3 +39,9 @@ cp youdao.py /usr/bin
 chmod +x /usr/bin/youdao.py
 alias yd='youdao.py'
 ```
+
+Add.py
+========
+把url添加到pocket（一个read it later应用）
+
+
