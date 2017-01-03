@@ -92,3 +92,13 @@ else
 fi
 }
 ```
+
+getBingPic
+====
+这里命令用来获取 bing.com 的背景图片，bing.com 的图片很适合作为桌面背景图  
+放在电脑上作为 crontab 任务每天跑一次即可。  
+
+cron 示例：
+
++  确认 crond 打开
++  1 1 * * * /usr/bin/python2 /home/telnetning/crontabFold/getBingPic.py  #每天一点零一分运行
