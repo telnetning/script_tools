@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+# -*- coding: UTF-8 -*-
 
 import sys
 import requests
@@ -14,6 +15,10 @@ def translate(word):
 
     doc = html.document_fromstring(r.text)
     tran_li = doc.xpath(u"//div[@id='phrsListTab']/div[@class='trans-container']/ul/li")
+    pron_li = doc.xpath(u"//span[@class='pronounce']")
+    for pron in pron_li:
+        print pron.text.strip(),
+        print pron.xpath(u"//span[@class='phonetic']")[0].text
     for piece in tran_li:
         print piece.text
 
